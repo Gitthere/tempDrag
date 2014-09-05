@@ -16,7 +16,7 @@ if (Meteor.isClient) {
     'click button': function () {
       // increment the boxes when button is clicked
       // Session.set("boxes", Session.get("boxes") + 1);
-      console.log(all-rooms);
+      console.log(Boxes);
     }
   });
 }
