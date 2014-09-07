@@ -23,7 +23,11 @@ if (Meteor.isClient) {
     var yCoordinate = event.originalEvent.clientY;
     square.style.left = xCoordinate + 'px';
     square.style.top = yCoordinate + 'px';
-
+    //this allows to change x, y coordinate on db when dragged
+    this.x = xCoordinate;
+    this.y = yCoordinate;
+    Boxes.update({_id: this._id}, this);
+    console.log(this);
     // also gets new coords
     // console.log(square);
     // console.log(square.offsetLeft, square.offsetTop);
@@ -34,10 +38,12 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
-    Boxes.remove({});
-    // code to run on server at startup
-    Boxes.insert({x: 400,
-                  y: 400
-                });
+    if (Boxes.find().fetch().length === 0) {
+      Boxes.remove({});
+      // code to run on server at startup
+      Boxes.insert({x: 100,
+                    y: 100
+                  });
+    }
   });
 }
