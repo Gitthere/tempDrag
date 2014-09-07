@@ -4,9 +4,15 @@
 
 <body>
   <h1>Welcome to Meteor!</h1>
-  {{> box}}
+  {{> boxContainer}}
 </body>
 
+<template name="boxContainer">
+  {{#each boxes}}
+    {{> box}}
+  {{/each}}
+</template>
+
 <template name="box">
-  <div class="draggable" draggable="true"></div>
+  <div class="draggable" draggable="true"></div> 
 </template>
