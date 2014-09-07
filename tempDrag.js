@@ -1,11 +1,13 @@
 Boxes = new Meteor.Collection("boxes");
 
-
-
-
 if (Meteor.isClient) {
 
-  Session.setDefault("boxes", 0);
+  Template.box.rendered = function() {
+    console.log(this);
+    // this.firstNode.style.left = '200px';
+    this.firstNode.style.left = this.data.x + 'px';
+    this.firstNode.style.top = this.data.y + 'px';
+  };
 
   Template.boxContainer.boxes = function() {
     return Boxes.find();
@@ -34,8 +36,8 @@ if (Meteor.isServer) {
   Meteor.startup(function () {
     Boxes.remove({});
     // code to run on server at startup
-    Boxes.insert({x: 0,
-                  y: 0
+    Boxes.insert({x: 400,
+                  y: 400
                 });
   });
 }
