@@ -5,18 +5,25 @@ if (Meteor.isClient) {
   // counter starts at 0
   Session.setDefault("boxes", 0);
 
-  Template.hello.helpers({
+  Template.box.helpers({
     counter: function () {
       return Session.get("boxes");
     }
 
   });
 
-  Template.hello.events({
-    'click button': function () {
+  Template.box.events({
+    'dragend .draggable': function (event, template) {
       // increment the boxes when button is clicked
       // Session.set("boxes", Session.get("boxes") + 1);
-      console.log(Boxes);
+    var square = template.find('.draggable');
+    square.style.left = event.originalEvent.clientX + 'px';
+    square.style.top = event.originalEvent.clientY + 'px';
+
+      console.log(event.originalEvent.clientX);
+      console.log(square);
+      console.log(square.offsetLeft, square.offsetTop);
+
     }
   });
 }
